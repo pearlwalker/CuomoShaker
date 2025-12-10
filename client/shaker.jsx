@@ -57,7 +57,7 @@ const CuomoList = (props) => {
             </div>
         )
     }
-    const cuomoNodes = Cuomos.map(cuomo => {
+    const cuomoNodes = cuomos.map(cuomo => {
         return (
             <div key={cuomo.id} className="cuomo" >
                 <img src="/assets/img/cuomoface.jpeg" alt="Cuomo face" className="cuomoFace" />
