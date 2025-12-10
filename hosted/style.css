@@ -229,6 +229,7 @@ img.cuomoFace {
     border-radius: 4px;
     margin-top:10px;
     float:left;
+    border: 2px solid black;
 }
 
 h3.emptyCuomo {
