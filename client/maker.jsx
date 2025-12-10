@@ -3,86 +3,86 @@ const React = require('react');
 const { useState, useEffect } = React;
 const { createRoot } = require('react-dom/client');
 
-const handleDomo = (e, onDomoAdded) => {
+const handleCuomo = (e, onCuomoAdded) => {
     e.preventDefault();
     helper.hideError();
 
-    const name = e.target.querySelector('#domoName').value;
-    const age = e.target.querySelector('#domoAge').value;
+    const name = e.target.querySelector('#cuomoName').value;
+    const age = e.target.querySelector('#cuomoAge').value;
 
     if (!name || !age) {
         helper.handleError('All fields are required!');
         return false;
     }
 
-    helper.sendPost(e.target.action, { name, age }, onDomoAdded);
+    helper.sendPost(e.target.action, { name, age }, onCuomoAdded);
     return false;
 };
 
-const DomoForm = (props) => {
+const CuomoForm = (props) => {
     return (
         <form
-            name="domoForm"
-            onSubmit={(e) => handleDomo(e, props.triggerReload)}
+            name="cuomoForm"
+            onSubmit={(e) => handleCuomo(e, props.triggerReload)}
             method="POST"
-            className="domoForm"
-            action="/maker"
-            id="domoForm"
+            className="cuomoForm"
+            action="/shaker"
+            id="cuomoForm"
         >
             <label htmlFor="name">Name: </label>
-            <input type="text" name="name" id="domoName" placeholder="Domo Name" />
+            <input type="text" name="name" id="cuomoName" placeholder="Cuomo Name" />
             <label htmlFor="age">Age: </label>
-            <input type="number" name="age" id="domoAge" min="0" />
-            <input className="makeDomoSubmit" type="submit" value="Make Domo" />
+            <input type="number" name="age" id="cuomoAge" min="0" />
+            <input className="shakeCuomoSubmit" type="submit" value="Shake Cuomo" />
         </form>
     );
 };
 
-const DomoList = (props) => {
-    const [domos, setDomos] = useState(props.domos);
+const CuomoList = (props) => {
+    const [cuomos, setCuomos] = useState(props.cuomos);
 
     useEffect(() => {
-        const loadDomosFromServer = async () => {
-            const response = await fetch('/getDomos');
+        const loadCuomosFromServer = async () => {
+            const response = await fetch('/getCuomos');
             const data = await response.json();
-            setDomos(data.domos);
+            setCuomos(data.cuomos);
         };
-        loadDomosFromServer();
-    }, [props.reloadDomos]);
+        loadCuomosFromServer();
+    }, [props.reloadCuomos]);
 
-    if (domos.length === 0) {
+    if (cuomos.length === 0) {
         return (
-            <div className="domoList">
-                <h3 className="emptyDomo">No Domos Yet!</h3>
+            <div className="cuomoList">
+                <h3 className="emptyCuomo">No Cuomos Yet!</h3>
             </div>
         )
     }
-    const domoNodes = domos.map(domo => {
+    const cuomoNodes = Cuomos.map(cuomo => {
         return (
-            <div key={domo.id} className="domo" >
-                <img src="/assets/img/domoface.jpeg" alt="Domo face" className="domoFace" />
-                <h3 className="domoName">Name: {domo.name}</h3>
-                <h3 className="domoAge">Age: {domo.age}</h3>
+            <div key={cuomo.id} className="cuomo" >
+                <img src="/assets/img/cuomoface.jpeg" alt="Cuomo face" className="cuomoFace" />
+                <h3 className="cuomoName">Name: {cuomo.name}</h3>
+                <h3 className="cuomoAge">Age: {cuomo.age}</h3>
             </div>
         );
     });
     return (
-        <div className="domoList">
-            {domoNodes}
+        <div className="cuomoList">
+            {cuomoNodes}
         </div>
     );
 };
 
 const App = () => {
-    const [reloadDomos, setReloadDomos] = useState(false);
+    const [reloadCuomos, setReloadCuomos] = useState(false);
 
     return (
         <div>
-            <div id="makeDomo">
-                <DomoForm triggerReload={() => setReloadDomos(!reloadDomos)} />
+            <div id="shakeCuomo">
+                <CuomoForm triggerReload={() => setReloadCuomos(!reloadCuomos)} />
             </div>
-            <div id="domos">
-                <DomoList domos={[]} reloadDomos={reloadDomos} />
+            <div id="cuomos">
+                <CuomoList cuomos={[]} reloadCuomos={reloadCuomos} />
             </div>
         </div>
     );

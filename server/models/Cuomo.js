@@ -3,7 +3,7 @@ const _ = require('underscore');
 
 const setName = (name) => _.escape(name).trim();
 
-const DomoSchema = new mongoose.Schema({
+const CuomoSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -26,10 +26,10 @@ const DomoSchema = new mongoose.Schema({
   },
 });
 
-DomoSchema.statics.toAPI = (doc) => ({
+CuomoSchema.statics.toAPI = (doc) => ({
   name: doc.name,
   age: doc.age,
 });
 
-const DomoModel = mongoose.model('Domo', DomoSchema);
-module.exports = DomoModel;
+const CuomoModel = mongoose.model('Cuomo', CuomoSchema);
+module.exports = CuomoModel;
