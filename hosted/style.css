@@ -263,3 +263,8 @@ h3.cuomoAge {
 .cuomo:last-child {
     margin-bottom:10px;
 }
+
+.ad {
+    width: 5rem;
+    border: 2 solid black;
+}
